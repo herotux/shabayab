@@ -1,5 +1,14 @@
-{% include "header.html" %}
+{% extends "base.html" %}
+{% block title %}تبدیل شماره حساب ملت به شماره شبا{% endblock %}
 
+{% block head %}
+    {{ super() }}
+    <style type="text/css">
+        .important { color: #336699; }
+    </style>
+{% endblock %}
+
+{% block content %}
 <div class="container-fluid">
     <div class="row text-center">
       <div class="col-sm">
@@ -23,9 +32,4 @@
       </div>
     </div>
   </div>
-    
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
-</body>
-</html>
+{% endblock %}
