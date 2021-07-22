@@ -8,11 +8,11 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/hekmat')
+@app.route('/acnttoiban/hekmat')
 def hekmat():
-    return render_template('hekmat.html')
+    return render_template('/acnttoiban/hekmat.html')
 
-@app.route("/hekmat", methods=["POST"])
+@app.route("/acnttoiban/hekmat", methods=["POST"])
 def hekmatconvert():
     an = request.form['accountnumber']
     #Bank identify number for hekmat iranian
@@ -25,13 +25,13 @@ def hekmatconvert():
     if len(cd) <2 :
         cd = "0" + str(cd)
     iban = cc + cd + bban
-    return render_template('hekmat.html',iban=iban)
+    return render_template('/acnttoiban/hekmat.html',iban=iban)
 
-@app.route('/mellat')
+@app.route('/acnttoiban/mellat')
 def mellat():
-    return render_template('mellat.html')
+    return render_template('/acnttoiban/mellat.html')
 
-@app.route("/mellat", methods=["POST"])
+@app.route("/acnttoiban/mellat", methods=["POST"])
 def mellatconvert():
     an = request.form['accountnumber']
     accounttype = request.form['accounttype']
@@ -50,4 +50,130 @@ def mellatconvert():
     if len(cd) <2 :
         cd = "0" + str(cd)
     iban = cc + cd + bban
-    return render_template('mellat.html',iban=iban)
+    return render_template('/acnttoiban/mellat.html',iban=iban)
+
+
+@app.route('/acnttoiban/melli')
+def melli():
+    return render_template('/acnttoiban/melli.html')
+
+@app.route("/acnttoiban/melli", methods=["POST"])
+def melliconvert():
+    an = request.form['accountnumber']
+    accounttype = request.form['accounttype']
+    #Bank identify number for melli 
+    bi = "017"
+    #Iran code
+    cc = "IR"
+    if accounttype == "1" :
+        #sepordeh
+        bban =  bi + "00000" + str(an)
+    elif accounttype == "2" :
+        #tas,hilat
+        bban =  bi + "10000" + str(an)
+    #check digits
+    cd=str(98 - int(bban + "182700") % 97)
+    if len(cd) <2 :
+        cd = "0" + str(cd)
+    iban = cc + cd + bban
+    return render_template('/acnttoiban/melli.html',iban=iban)
+
+@app.route('/acnttoiban/ayandeh')
+def ayandeh():
+    return render_template('/acnttoiban/ayandeh.html')
+
+@app.route("/acnttoiban/ayandeh", methods=["POST"])
+def ayandehconvert():
+    an = request.form['accountnumber']
+    #Bank identify number for ayandeh 
+    bi = "062"
+    #Iran code
+    cc = "IR"
+    bban =  bi + "000000" + str(an)
+    #check digits
+    cd=str(98 - int(bban + "182700") % 97)
+    if len(cd) <2 :
+        cd = "0" + str(cd)
+    iban = cc + cd + bban
+    return render_template('/acnttoiban/ayandeh.html',iban=iban)
+
+@app.route('/acnttoiban/saderat')
+def saderat():
+    return render_template('/acnttoiban/saderat.html')
+
+@app.route("/acnttoiban/saderat", methods=["POST"])
+def saderatconvert():
+    an = request.form['accountnumber']
+    #Bank identify number for saderat 
+    bi = "019"
+    #Iran code
+    cc = "IR"
+    bban =  bi + "000000" + str(an)
+    #check digits
+    cd=str(98 - int(bban + "182700") % 97)
+    if len(cd) <2 :
+        cd = "0" + str(cd)
+    iban = cc + cd + bban
+    return render_template('/acnttoiban/saderat.html',iban=iban)
+
+@app.route('/acnttoiban/keshavarzi')
+def keshavarzi():
+    return render_template('/acnttoiban/keshavarzi.html')
+
+@app.route("/acnttoiban/keshavarzi", methods=["POST"])
+def keshavarziconvert():
+    an = request.form['accountnumber']
+    #Bank identify number for keshavarzi 
+    bi = "016"
+    #Iran code
+    cc = "IR"
+    bban =  bi + "0000000000" + str(an)
+    #check digits
+    cd=str(98 - int(bban + "182700") % 97)
+    if len(cd) <2 :
+        cd = "0" + str(cd)
+    iban = cc + cd + bban
+    return render_template('/acnttoiban/keshavarzi.html',iban=iban)
+
+
+@app.route('/acnttoiban/refah')
+def refah():
+    return render_template('/acnttoiban/refah.html')
+
+@app.route("/acnttoiban/refah", methods=["POST"])
+def refahconvert():
+    an = request.form['accountnumber']
+    #Bank identify number for refah 
+    bi = "013"
+    #Iran code
+    cc = "IR"
+    bban =  bi + "01000000" + str(an)
+    #check digits
+    cd=str(98 - int(bban + "182700") % 97)
+    if len(cd) <2 :
+        cd = "0" + str(cd)
+    iban = cc + cd + bban
+    return render_template('/acnttoiban/refah.html',iban=iban)
+
+@app.route('/acnttoiban/tejarat')
+def tejarat():
+    return render_template('/acnttoiban/tejarat.html')
+
+@app.route("/acnttoiban/tejarat", methods=["POST"])
+def tejaratconvert():
+    an = request.form['accountnumber']
+    #Bank identify number for tejarat 
+    bi = "018"
+    #Iran code
+    cc = "IR"
+    bban =  bi + "0000000000" + str(an)
+    #check digits
+    cd=str(98 - int(bban + "182700") % 97)
+    if len(cd) <2 :
+        cd = "0" + str(cd)
+    iban = cc + cd + bban
+    return render_template('/acnttoiban/tejarat.html',iban=iban)
+
+
+
+     

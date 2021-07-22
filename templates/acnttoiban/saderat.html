@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}خانه{% endblock %}
+{% block title %}تبدیل شماره حساب بانک صادرات به شماره شبا{% endblock %}
 {% block head %}
     {{ super() }}
     <style type="text/css">
@@ -13,8 +13,8 @@
       <div class="col-sm">
         <h3>شماره حساب را وارد کنید:</h3>
         <div class="form-group"></div>
-            <form action="/hekmat" method="POST">
-                <label for="accountnumber" class="col-sm-2 col-form-label" >شماره حساب حکمت ایرانیان:</label>
+            <form action="/acnttoiban/saderat" method="POST">
+                <label for="accountnumber" class="col-sm-2 col-form-label" >شماره حساب بانک صادرات :</label>
                 <input name="accountnumber"><br><br>
                 <input class="btn btn-primary" type="submit" value="محاسبه">
             </form>

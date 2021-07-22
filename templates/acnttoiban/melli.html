@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}تبدیل شماره حساب ملت به شماره شبا{% endblock %}
+{% block title %}تبدیل شماره حساب ملی به شماره شبا{% endblock %}
 
 {% block head %}
     {{ super() }}
@@ -14,15 +14,14 @@
       <div class="col-sm">
         <h3>شماره حساب را وارد کنید:</h3>
 
-        <form action="/mellat" method="POST">
-          <label for="accountnumber" class="col-sm-2 col-form-label" >شماره حساب ملت :</label>
+        <form action="/acnttoiban/mellat" method="POST">
+          <label for="accountnumber" class="col-sm-2 col-form-label" >شماره حساب ملی :</label>
           <input name="accountnumber"><br><br>
           <label for="accounttype" class="col-sm-2 col-form-label" >نوع حساب:</label>
           <select name="accounttype" class="custom-select">
             <option selected>نوع حساب را انتخاب کنید</option>
-            <option value="1">جاری</option>
-            <option value="2">قرض الحسنه</option>
-            <option value="3">کوتاه مدت</option>
+            <option value="1">سپرده</option>
+            <option value="2">تسهیلات</option>
           </select><br><br>
           <input class="btn btn-primary" type="submit" value="محاسبه">
         </form>
