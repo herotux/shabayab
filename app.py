@@ -174,6 +174,21 @@ def tejaratconvert():
     iban = cc + cd + bban
     return render_template('/acnttoiban/tejarat.html',iban=iban)
 
+@app.route('/acnttoiban/saman')
+def saman():
+    return render_template('/acnttoiban/saman.html')
 
-
-     
+@app.route("/acnttoiban/saman", methods=["POST"])
+def samanconvert():
+    an = request.form['accountnumber']
+    #Bank identify number for saman
+    bi = "056"
+    #Iran code
+    cc = "IR"
+    bban =  bi + "0" + str(an)
+    #check digits
+    cd=str(98 - int(bban + "182700") % 97)
+    if len(cd) <2 :
+        cd = "0" + str(cd)
+    iban = cc + cd + bban
+    return render_template('/acnttoiban/saman.html',iban=iban)
