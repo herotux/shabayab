@@ -192,3 +192,22 @@ def samanconvert():
         cd = "0" + str(cd)
     iban = cc + cd + bban
     return render_template('/acnttoiban/saman.html',iban=iban)
+
+@app.route('/acnttoiban/parsian')
+def parsian():
+    return render_template('/acnttoiban/parsian.html')
+
+@app.route("/acnttoiban/parsian", methods=["POST"])
+def parsianconvert():
+    an = request.form['accountnumber']
+    #Bank identify number for parsian
+    bi = "054"
+    #Iran code
+    cc = "IR"
+    bban =  bi + "01219" + str(an)
+    #check digits
+    cd=str(98 - int(bban + "182700") % 97)
+    if len(cd) <2 :
+        cd = "0" + str(cd)
+    iban = cc + cd + bban
+    return render_template('/acnttoiban/parsian.html',iban=iban)
