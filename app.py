@@ -174,6 +174,59 @@ def tejaratconvert():
     iban = cc + cd + bban
     return render_template('/acnttoiban/tejarat.html',iban=iban)
 
+@app.route('/acnttoiban/saman')
+def saman():
+    return render_template('/acnttoiban/saman.html')
 
+@app.route("/acnttoiban/saman", methods=["POST"])
+def samanconvert():
+    an = request.form['accountnumber']
+    #Bank identify number for saman
+    bi = "056"
+    #Iran code
+    cc = "IR"
+    bban =  bi + "0" + str(an)
+    #check digits
+    cd=str(98 - int(bban + "182700") % 97)
+    if len(cd) <2 :
+        cd = "0" + str(cd)
+    iban = cc + cd + bban
+    return render_template('/acnttoiban/saman.html',iban=iban)
 
-     
+@app.route('/acnttoiban/parsian')
+def parsian():
+    return render_template('/acnttoiban/parsian.html')
+
+@app.route("/acnttoiban/parsian", methods=["POST"])
+def parsianconvert():
+    an = request.form['accountnumber']
+    #Bank identify number for parsian
+    bi = "054"
+    #Iran code
+    cc = "IR"
+    bban =  bi + "01219" + str(an)
+    #check digits
+    cd=str(98 - int(bban + "182700") % 97)
+    if len(cd) <2 :
+        cd = "0" + str(cd)
+    iban = cc + cd + bban
+    return render_template('/acnttoiban/parsian.html',iban=iban)
+
+@app.route('/acnttoiban/shahr')
+def shahr():
+    return render_template('/acnttoiban/shahr.html')
+
+@app.route("/acnttoiban/shahr", methods=["POST"])
+def shahrconvert():
+    an = request.form['accountnumber']
+    #Bank identify number for shahr
+    bi = "061"
+    #Iran code
+    cc = "IR"
+    bban =  bi + "0000000" + str(an)
+    #check digits
+    cd=str(98 - int(bban + "182700") % 97)
+    if len(cd) <2 :
+        cd = "0" + str(cd)
+    iban = cc + cd + bban
+    return render_template('/acnttoiban/shahr.html',iban=iban)
