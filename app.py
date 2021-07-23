@@ -211,3 +211,22 @@ def parsianconvert():
         cd = "0" + str(cd)
     iban = cc + cd + bban
     return render_template('/acnttoiban/parsian.html',iban=iban)
+
+@app.route('/acnttoiban/shahr')
+def shahr():
+    return render_template('/acnttoiban/shahr.html')
+
+@app.route("/acnttoiban/shahr", methods=["POST"])
+def shahrconvert():
+    an = request.form['accountnumber']
+    #Bank identify number for shahr
+    bi = "061"
+    #Iran code
+    cc = "IR"
+    bban =  bi + "0000000" + str(an)
+    #check digits
+    cd=str(98 - int(bban + "182700") % 97)
+    if len(cd) <2 :
+        cd = "0" + str(cd)
+    iban = cc + cd + bban
+    return render_template('/acnttoiban/shahr.html',iban=iban)
