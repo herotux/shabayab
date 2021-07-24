@@ -312,3 +312,24 @@ def karafarinconvert():
         cd = "0" + str(cd)
     iban = cc + cd + bban
     return render_template('/acnttoiban/karafarin.html', iban=iban)
+
+
+@app.route('/acnttoiban/kosar')
+def kosar():
+    return render_template('/acnttoiban/kosar.html')
+
+
+@app.route("/acnttoiban/kosar", methods=["POST"])
+def kosarconvert():
+    an = request.form['accountnumber']
+    # Bank identify number for kosar
+    bi = "073"
+    # Iran code
+    cc = "IR"
+    bban = bi + "00000000" + str(an)
+    # check digits
+    cd = str(98 - int(bban + "182700") % 97)
+    if len(cd) < 2:
+        cd = "0" + str(cd)
+    iban = cc + cd + bban
+    return render_template('/acnttoiban/kosar.html', iban=iban)
