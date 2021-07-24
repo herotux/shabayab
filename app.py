@@ -333,3 +333,24 @@ def kosarconvert():
         cd = "0" + str(cd)
     iban = cc + cd + bban
     return render_template('/acnttoiban/kosar.html', iban=iban)
+
+
+@app.route('/acnttoiban/khavarmiane')
+def khavarmiane():
+    return render_template('/acnttoiban/khavarmiane.html')
+
+
+@app.route("/acnttoiban/khavarmiane", methods=["POST"])
+def khavarmianeconvert():
+    an = request.form['accountnumber']
+    # Bank identify number for khavarmiane
+    bi = "078"
+    # Iran code
+    cc = "IR"
+    bban = bi + "0" + str(an)
+    # check digits
+    cd = str(98 - int(bban + "182700") % 97)
+    if len(cd) < 2:
+        cd = "0" + str(cd)
+    iban = cc + cd + bban
+    return render_template('/acnttoiban/khavarmiane.html', iban=iban)
