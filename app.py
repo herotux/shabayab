@@ -291,3 +291,24 @@ def sepahconvert():
         cd = "0" + str(cd)
     iban = cc + cd + bban
     return render_template('/acnttoiban/sepah.html', iban=iban)
+
+
+@app.route('/acnttoiban/karafarin')
+def karafarin():
+    return render_template('/acnttoiban/karafarin.html')
+
+
+@app.route("/acnttoiban/karafarin", methods=["POST"])
+def karafarinconvert():
+    an = request.form['accountnumber']
+    # Bank identify number for karafarin
+    bi = "053"
+    # Iran code
+    cc = "IR"
+    bban = bi + "000000" + str(an)
+    # check digits
+    cd = str(98 - int(bban + "182700") % 97)
+    if len(cd) < 2:
+        cd = "0" + str(cd)
+    iban = cc + cd + bban
+    return render_template('/acnttoiban/karafarin.html', iban=iban)
