@@ -270,3 +270,24 @@ def deyconvert():
         cd = "0" + str(cd)
     iban = cc + cd + bban
     return render_template('/acnttoiban/dey.html', iban=iban)
+
+
+@app.route('/acnttoiban/sepah')
+def sepah():
+    return render_template('/acnttoiban/sepah.html')
+
+
+@app.route("/acnttoiban/sepah", methods=["POST"])
+def sepahconvert():
+    an = request.form['accountnumber']
+    # Bank identify number for sepah
+    bi = "015"
+    # Iran code
+    cc = "IR"
+    bban = bi + "0000000" + str(an)
+    # check digits
+    cd = str(98 - int(bban + "182700") % 97)
+    if len(cd) < 2:
+        cd = "0" + str(cd)
+    iban = cc + cd + bban
+    return render_template('/acnttoiban/sepah.html', iban=iban)
