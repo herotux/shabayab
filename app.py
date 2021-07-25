@@ -374,7 +374,7 @@ def eghnovinconvert():
     if len(cd) < 2:
         cd = "0" + str(cd)
     iban = cc + cd + bban
-    return render_template('/acnttoiban/heeghnovinkmat.html', iban=iban)
+    return render_template('/acnttoiban/eghnovin.html', iban=iban)
 
 
 @app.route('/acnttoiban/ansar')
