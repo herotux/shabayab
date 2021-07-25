@@ -354,3 +354,166 @@ def khavarmianeconvert():
         cd = "0" + str(cd)
     iban = cc + cd + bban
     return render_template('/acnttoiban/khavarmiane.html', iban=iban)
+
+
+@app.route('/acnttoiban/eghnovin')
+def eghnovin():
+    return render_template('/acnttoiban/eghnovin.html')
+
+
+@app.route("/acnttoiban/eghnovin", methods=["POST"])
+def eghnovinconvert():
+    an = request.form['accountnumber']
+    # Bank identify number for eghnovin
+    bi = "055"
+    # Iran code
+    cc = "IR"
+    bban = bi + "0" + str(an)[:5] + "0" + str(an)[5:8] + "0" +str(an)[8:-1] + "0" + str(an)[-1]
+    # check digits
+    cd = str(98 - int(bban + "182700") % 97)
+    if len(cd) < 2:
+        cd = "0" + str(cd)
+    iban = cc + cd + bban
+    return render_template('/acnttoiban/heeghnovinkmat.html', iban=iban)
+
+
+@app.route('/acnttoiban/ansar')
+def ansar():
+    return render_template('/acnttoiban/ansar.html')
+
+@app.route("/acnttoiban/ansar", methods=["POST"])
+def ansarconvert():
+    an = request.form['accountnumber']
+    # Bank identify number for ansar
+    bi = "063"
+    # Iran code
+    cc = "IR"
+    bban = bi + "0" + str(an)[0:-1] + "00" + str(an)[-1]
+    # check digits
+    cd = str(98 - int(bban + "182700") % 97)
+    if len(cd) < 2:
+        cd = "0" + str(cd)
+    iban = cc + cd + bban
+    return render_template('/acnttoiban/ansar.html', iban=iban)
+
+
+@app.route('/acnttoiban/iranzamin')
+def iranzamin():
+    return render_template('/acnttoiban/iranzamin.html')
+
+@app.route("/acnttoiban/iranzamin", methods=["POST"])
+def iranzaminconvert():
+    an = request.form['accountnumber']
+    # Bank identify number for iranzamin
+    bi = "069"
+    # Iran code
+    cc = "IR"
+    bban = bi + "00" + str(an)[0:4] + "0" + str(an)[4:-1] + "0" + str(an)[-1]
+    # check digits
+    cd = str(98 - int(bban + "182700") % 97)
+    if len(cd) < 2:
+        cd = "0" + str(cd)
+    iban = cc + cd + bban
+    return render_template('/acnttoiban/iranzamin.html', iban=iban)
+
+@app.route('/acnttoiban/pasargad')
+def pasargad():
+    return render_template('/acnttoiban/pasargad.html')
+
+@app.route("/acnttoiban/pasargad", methods=["POST"])
+def pasargadconvert():
+    an = request.form['accountnumber']
+    # Bank identify number for pasargad
+    bi = "057"
+    # Iran code
+    cc = "IR"
+    bban = bi + "00" + str(an)[0:-1] + "00" + str(an)[-1]
+    # check digits
+    cd = str(98 - int(bban + "182700") % 97)
+    if len(cd) < 2:
+        cd = "0" + str(cd)
+    iban = cc + cd + bban
+    return render_template('/acnttoiban/pasargad.html', iban=iban)
+
+
+@app.route('/acnttoiban/tosetavon')
+def tosetavon():
+    return render_template('/acnttoiban/tosetavon.html')
+
+@app.route("/acnttoiban/tosetavon", methods=["POST"])
+def tosetavonconvert():
+    an = request.form['accountnumber']
+    # Bank identify number for tosetavon
+    bi = "022"
+    # Iran code
+    cc = "IR"
+    bban = bi + "0" + str(an)[0:5] + "0" + str(an)[5:-1] + "00" + str(an)[-1]
+    # check digits
+    cd = str(98 - int(bban + "182700") % 97)
+    if len(cd) < 2:
+        cd = "0" + str(cd)
+    iban = cc + cd + bban
+    return render_template('/acnttoiban/tosetavon.html', iban=iban)
+
+@app.route('/acnttoiban/tosesaderat')
+def tosesaderat():
+    return render_template('/acnttoiban/tosesaderat.html')
+
+@app.route("/acnttoiban/tosesaderat", methods=["POST"])
+def tosesaderatconvert():
+    an = request.form['accountnumber']
+    # Bank identify number for tosesaderat
+    bi = "020"
+    # Iran code
+    cc = "IR"
+    bban = bi + "000000" + str(an)
+    # check digits
+    cd = str(98 - int(bban + "182700") % 97)
+    if len(cd) < 2:
+        cd = "0" + str(cd)
+    iban = cc + cd + bban
+    return render_template('/acnttoiban/tosesaderat.html', iban=iban)
+
+
+
+@app.route('/acnttoiban/sarmayeh')
+def sarmayeh():
+    return render_template('/acnttoiban/sarmayeh.html')
+
+@app.route("/acnttoiban/sarmayeh", methods=["POST"])
+def sarmayehconvert():
+    an = request.form['accountnumber']
+    # Bank identify number for sarmayeh
+    bi = "058"
+    # Iran code
+    cc = "IR"
+    bban = bi + "0" + str(an)[0:8] + "00" + str(an)[8:-1] + "00" + str(an)[-1]
+    # check digits
+    cd = str(98 - int(bban + "182700") % 97)
+    if len(cd) < 2:
+        cd = "0" + str(cd)
+    iban = cc + cd + bban
+    return render_template('/acnttoiban/sarmayeh.html', iban=iban)
+
+
+@app.route('/acnttoiban/sanatmadan')
+def sanatmadan():
+    return render_template('/acnttoiban/sanatmadan.html')
+
+@app.route("/acnttoiban/sanatmadan", methods=["POST"])
+def sanatmadanconvert():
+    an = request.form['accountnumber']
+    # Bank identify number for sanatmadan
+    bi = "011"
+    # Iran code
+    cc = "IR"
+    bban = bi + "000000" + str(an)
+    # check digits
+    cd = str(98 - int(bban + "182700") % 97)
+    if len(cd) < 2:
+        cd = "0" + str(cd)
+    iban = cc + cd + bban
+    return render_template('/acnttoiban/sanatmadan.html', iban=iban)
+
+
+
