@@ -1,5 +1,7 @@
 {% extends "base.html" %}
-{% block title %}خانه{% endblock %}
+{% block title %}
+<title>خانه|شبایاب</title>
+{% endblock %}
 {% block head %}
     {{ super() }}
     <style type="text/css">
@@ -108,9 +110,9 @@
           </div>
            <div class="col-sm text-center">
              <div class="views-field views-field-field-image">
-                <div class="field-content"><a href="#" target="_blank"><img typeof="foaf:Image" src="{{url_for('static', filename='sina.png')}}" alt="" width="150" height="150"></a></div>
+                <div class="field-content"><a href="/acnttoiban/sina" target="_blank"><img typeof="foaf:Image" src="{{url_for('static', filename='sina.png')}}" alt="" width="150" height="150"></a></div>
              </div>
-             <div class="text-center"><span class="field-content"><a href="#" target="_blank">بانک سینا</a></span></div>
+             <div class="text-center"><span class="field-content"><a href="/acnttoiban/sina" target="_blank">بانک سینا</a></span></div>
           </div>
            <div class="col-sm text-center">
              <div class="views-field views-field-field-image">
