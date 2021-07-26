@@ -567,3 +567,26 @@ def resalatconvert():
         cd = "0" + str(cd)
     iban = cc + cd + bban
     return render_template('/acnttoiban/resalat.html', iban=iban)
+
+
+@app.route('/acnttoiban/sina')
+def sina():
+    return render_template('/acnttoiban/sina.html')
+
+
+@app.route("/acnttoiban/sina", methods=["POST"])
+def sinaconvert():
+    an = request.form['accountnumber']
+    # Bank identify number for sina
+    bi = "059"
+    # Iran code
+    cc = "IR"
+    bban = bban = bi + "00" + str(an)[:3] + \
+        '00' + str(an)[3:-1] + '00' + str(an)[-1]
+
+    # check digits
+    cd = str(98 - int(bban + "182700") % 97)
+    if len(cd) < 2:
+        cd = "0" + str(cd)
+    iban = cc + cd + bban
+    return render_template('/acnttoiban/sina.html', iban=iban)
