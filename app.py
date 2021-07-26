@@ -517,3 +517,24 @@ def sanatmadanconvert():
 
 
 
+
+
+
+@app.route('/acnttoiban/gardeshgari')
+def gardeshgari():
+    return render_template('/acnttoiban/gardeshgari.html')
+
+@app.route("/acnttoiban/gardeshgari", methods=["POST"])
+def gardeshgariconvert():
+    an = request.form['accountnumber']
+    # Bank identify number for gardeshgari
+    bi = "064"
+    # Iran code
+    cc = "IR"
+    bban = bi + "00" + str(an)[0:3] + "00" + str(an)[3:5] + "0" + str(an)[5:-1] + '00' + str(an)[-1]
+    # check digits
+    cd = str(98 - int(bban + "182700") % 97)
+    if len(cd) < 2:
+        cd = "0" + str(cd)
+    iban = cc + cd + bban
+    return render_template('/acnttoiban/gardeshgari.html', iban=iban)
