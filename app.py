@@ -429,10 +429,16 @@ def pasargad():
 def pasargadconvert():
     an = request.form['accountnumber']
     # Bank identify number for pasargad
+    an= an.split('-')
+    anfull = "".join(an)
+    
     bi = "057"
     # Iran code
     cc = "IR"
-    bban = bi + "00" + str(an)[0:-1] + "00" + str(an)[-1]
+    if len(anfull) == 12:
+        bban = bi + "00" + str(an[0]) + "0" + str(an[1]) + "00" + str(an[2]) + "00" + str(an[-1])
+    else :
+        bban = bi + "00" + str(an[0])+ str(an[1])+ str(an[2]) + "00" + str(an[-1])
     # check digits
     cd = str(98 - int(bban + "182700") % 97)
     if len(cd) < 2:
