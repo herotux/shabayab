@@ -619,3 +619,25 @@ def markaziconvert():
         cd = "0" + str(cd)
     iban = cc + cd + bban
     return render_template('/acnttoiban/markazi.html', iban=iban)
+
+
+@app.route('/acnttoiban/ghavamin')
+def ghavamin():
+    return render_template('/acnttoiban/ghavamin.html')
+
+
+@app.route("/acnttoiban/ghavamin", methods=["POST"])
+def ghavaminconvert():
+    an = request.form['accountnumber']
+    # Bank identify number for ghavamin
+    bi = "052"
+    # Iran code
+    cc = "IR"
+    bban = bi + "0000" + str(an)
+
+    # check digits
+    cd = str(98 - int(bban + "182700") % 97)
+    if len(cd) < 2:
+        cd = "0" + str(cd)
+    iban = cc + cd + bban
+    return render_template('/acnttoiban/ghavamin.html', iban=iban)
