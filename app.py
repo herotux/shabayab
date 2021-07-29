@@ -587,7 +587,7 @@ def sinaconvert():
     bi = "059"
     # Iran code
     cc = "IR"
-    bban = bban = bi + "00" + str(an)[:3] + \
+    bban = bi + "00" + str(an)[:3] + \
         '00' + str(an)[3:-1] + '00' + str(an)[-1]
 
     # check digits
@@ -596,3 +596,26 @@ def sinaconvert():
         cd = "0" + str(cd)
     iban = cc + cd + bban
     return render_template('/acnttoiban/sina.html', iban=iban)
+
+
+
+@app.route('/acnttoiban/markazi')
+def markazi():
+    return render_template('/acnttoiban/markazi.html')
+
+
+@app.route("/acnttoiban/markazi", methods=["POST"])
+def markaziconvert():
+    an = request.form['accountnumber']
+    # Bank identify number for markazi
+    bi = "010"
+    # Iran code
+    cc = "IR"
+    bban = bi + "000" + str(an)
+
+    # check digits
+    cd = str(98 - int(bban + "182700") % 97)
+    if len(cd) < 2:
+        cd = "0" + str(cd)
+    iban = cc + cd + bban
+    return render_template('/acnttoiban/markazi.html', iban=iban)
