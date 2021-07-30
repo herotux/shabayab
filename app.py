@@ -686,3 +686,31 @@ def mehriranconvert():
         cd = "0" + str(cd)
     iban = cc + cd + bban
     return render_template('/acnttoiban/mehriran.html', iban=iban)
+
+
+@app.route('/acnttoiban/maskan')
+def maskan():
+    return render_template('/acnttoiban/maskan.html')
+
+
+@app.route("/acnttoiban/maskan", methods=["POST"])
+def maskanconvert():
+    an = request.form['accountnumber']
+    accounttype = request.form['accounttype']
+    # Bank identify number for maskan
+    bi = "014"
+    # Iran code
+    cc = "IR"
+    if accounttype == "tashilat":
+        bban = bi + "302" + str(an)
+    elif accounttype == "seporde" and len(str(an)) == 11:
+        bban = bi + "0040000" + str(an)
+    elif accounttype == "seporde" and len(str(an)) == 12:
+        bban = bi + "00400000" + str(an)
+
+    # check digits
+    cd = str(98 - int(bban + "182700") % 97)
+    if len(cd) < 2:
+        cd = "0" + str(cd)
+    iban = cc + cd + bban
+    return render_template('/acnttoiban/mellat.html', iban=iban)
