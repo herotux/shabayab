@@ -664,3 +664,25 @@ def mehreqtesadconvert():
         cd = "0" + str(cd)
     iban = cc + cd + bban
     return render_template('/acnttoiban/mehreqtesad.html', iban=iban)
+
+
+@app.route('/acnttoiban/mehriran')
+def mehriran():
+    return render_template('/acnttoiban/mehriran.html')
+
+
+@app.route("/acnttoiban/mehriran", methods=["POST"])
+def mehriranconvert():
+    an = request.form['accountnumber']
+    # Bank identify number for mehriran
+    bi = "060"
+    # Iran code
+    cc = "IR"
+    bban = bi + "0" + str(an)[:-1] + "00" + str(an)[-1]
+
+    # check digits
+    cd = str(98 - int(bban + "182700") % 97)
+    if len(cd) < 2:
+        cd = "0" + str(cd)
+    iban = cc + cd + bban
+    return render_template('/acnttoiban/mehriran.html', iban=iban)
