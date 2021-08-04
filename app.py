@@ -596,3 +596,132 @@ def sinaconvert():
         cd = "0" + str(cd)
     iban = cc + cd + bban
     return render_template('/acnttoiban/sina.html', iban=iban)
+
+
+
+@app.route('/acnttoiban/iranvenezola')
+def iranvenezola():
+    return render_template('/acnttoiban/iranvenezola.html')
+
+
+@app.route("/acnttoiban/iranvenezola", methods=["POST"])
+def iranvenezolaconvert():
+    an = request.form['accountnumber']
+    # Bank identify number for iranvenezola
+    bi = "095"
+    # Iran code
+    cc = "IR"
+    bban = bi + "000000000" + str(an)
+    # check digits
+    cd = str(98 - int(bban + "182700") % 97)
+    if len(cd) < 2:
+        cd = "0" + str(cd)
+    if(len(an)<10  | len(an) >10):
+        iban = "شماره حساب را بصورت صحیح وارد کنید"
+    else:
+        iban = cc + cd + bban
+    return render_template('/acnttoiban/iranvenezola.html', iban=iban)
+
+
+
+@app.route('/acnttoiban/etebaritose')
+def etebaritose():
+    return render_template('/acnttoiban/etebaritose.html')
+
+
+@app.route("/acnttoiban/etebaritose", methods=["POST"])
+def etebaritoseconvert():
+    an = request.form['accountnumber']
+    # Bank identify number for etebaritose
+    an= an.split('-')
+    anfull = "".join(an)
+    
+    bi = "051"
+    # Iran code
+    cc = "IR"
+    bban = bi + "00" + str(an[0]) + str(an[1]) + "00" + str(an[2]) + "00" + str(an[-1])
+    # check digits
+    cd = str(98 - int(bban + "182700") % 97)
+    if len(cd) < 2:
+        cd = "0" + str(cd)
+    iban = cc + cd + bban
+    return render_template('/acnttoiban/etebaritose.html', iban=iban)
+
+
+
+@app.route('/acnttoiban/postbank')
+def postbank():
+    return render_template('/acnttoiban/postbank.html')
+
+
+@app.route("/acnttoiban/postbank", methods=["POST"])
+def postbankconvert():
+    an = request.form['accountnumber']
+    # Bank identify number for postbank
+    bi = "021"
+    # Iran code
+    cc = "IR"
+    lan = len(an)
+    lzeros = 19 - lan
+    zeros = lzeros * "0"   
+    bban = bi + lzeros + str(an)
+    # check digits
+    cd = str(98 - int(bban + "182700") % 97)
+    if len(cd) < 2:
+        cd = "0" + str(cd)
+    if(len(an)<13  | len(an) >18):
+        iban = "شماره حساب را بصورت صحیح وارد کنید"
+    else:
+        iban = cc + cd + bban
+    return render_template('/acnttoiban/postbank.html', iban=iban)
+
+
+
+
+@app.route('/acnttoiban/elebarimelal')
+def elebarimelal():
+    return render_template('/acnttoiban/elebarimelal.html')
+
+
+@app.route("/acnttoiban/elebarimelal", methods=["POST"])
+def elebarimelalconvert():
+    an = request.form['accountnumber']
+    # Bank identify number for elebarimelal
+    bi = "095"
+    # Iran code
+    cc = "IR"
+    bban = bi + "0" + str(an)
+    # check digits
+    cd = str(98 - int(bban + "182700") % 97)
+    if len(cd) < 2:
+        cd = "0" + str(cd)
+    if(len(an) != 18 ):
+        iban = "شماره حساب را بصورت صحیح وارد کنید"
+    else:
+        iban = cc + cd + bban
+    return render_template('/acnttoiban/elebarimelal.html', iban=iban)
+
+
+
+@app.route('/acnttoiban/noor')
+def noor():
+    return render_template('/acnttoiban/noor.html')
+
+
+@app.route("/acnttoiban/noor", methods=["POST"])
+def noorconvert():
+    an = request.form['accountnumber']
+    # Bank identify number for noor
+    bi = "080"
+    # Iran code
+    cc = "IR"
+    bban = bi + "000000" + str(an)
+    # check digits
+    cd = str(98 - int(bban + "182700") % 97)
+    if len(cd) < 2:
+        cd = "0" + str(cd)
+    if(len(an) != 13 ):
+        iban = "شماره حساب را بصورت صحیح وارد کنید"
+    else:
+        iban = cc + cd + bban
+    return render_template('/acnttoiban/noor.html', iban=iban)
