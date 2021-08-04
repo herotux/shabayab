@@ -647,7 +647,7 @@ def ghavaminconvert():
 
 @app.route('/acnttoiban/mehreqtesad')
 def mehreqtesad():
-    return render_template('/acnttoiban/mehreeghtesad.html')
+    return render_template('/acnttoiban/mehreqtesad.html')
 
 
 @app.route("/acnttoiban/mehreqtesad", methods=["POST"])
@@ -799,7 +799,7 @@ def postbankconvert():
 
 @app.route('/acnttoiban/etebarimelal')
 def elebarimelal():
-    return render_template('/acnttoiban/elebarimelal.html')
+    return render_template('/acnttoiban/etebarimelal.html')
 
 
 @app.route("/acnttoiban/elebarimelal", methods=["POST"])

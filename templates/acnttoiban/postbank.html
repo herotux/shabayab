@@ -12,7 +12,7 @@
     <div class="row text-center">
       <div class="col-sm">
         <h3>شماره حساب را وارد کنید:</h3>
-        <div class="form-group"></div>
+        <div class="form-group">
             <form action="/acnttoiban/postbank" method="POST">
                 <label for="accountnumber" class="col-sm-2 col-form-label" >شماره حساب پست بانک :</label>
                 <input name="accountnumber"><br><br>
@@ -24,10 +24,6 @@
             </a>
               <br></br>
             <br></br>
-            <a class="btn btn-outline-primary" href="/" role="button">
-                بازگشت به صفحه اصلی
-            </a>
-              <br></br>
         </div>
         {% if iban%}
         <h3>{{ iban }}</h3>
