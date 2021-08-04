@@ -429,16 +429,18 @@ def pasargad():
 def pasargadconvert():
     an = request.form['accountnumber']
     # Bank identify number for pasargad
-    an= an.split('-')
+    an = an.split('-')
     anfull = "".join(an)
-    
+
     bi = "057"
     # Iran code
     cc = "IR"
     if len(anfull) == 12:
-        bban = bi + "00" + str(an[0]) + "0" + str(an[1]) + "00" + str(an[2]) + "00" + str(an[-1])
-    else :
-        bban = bi + "00" + str(an[0])+ str(an[1])+ str(an[2]) + "00" + str(an[-1])
+        bban = bi + "00" + str(an[0]) + "0" + str(an[1]) + \
+            "00" + str(an[2]) + "00" + str(an[-1])
+    else:
+        bban = bi + "00" + str(an[0]) + str(an[1]) + \
+            str(an[2]) + "00" + str(an[-1])
     # check digits
     cd = str(98 - int(bban + "182700") % 97)
     if len(cd) < 2:
@@ -587,7 +589,7 @@ def sinaconvert():
     bi = "059"
     # Iran code
     cc = "IR"
-    bban = bban = bi + "00" + str(an)[:3] + \
+    bban = bi + "00" + str(an)[:3] + \
         '00' + str(an)[3:-1] + '00' + str(an)[-1]
 
     # check digits
@@ -596,6 +598,123 @@ def sinaconvert():
         cd = "0" + str(cd)
     iban = cc + cd + bban
     return render_template('/acnttoiban/sina.html', iban=iban)
+
+
+
+@app.route('/acnttoiban/markazi')
+def markazi():
+    return render_template('/acnttoiban/markazi.html')
+
+
+@app.route("/acnttoiban/markazi", methods=["POST"])
+def markaziconvert():
+    an = request.form['accountnumber']
+    # Bank identify number for markazi
+    bi = "010"
+    # Iran code
+    cc = "IR"
+    bban = bi + "000" + str(an)
+
+    # check digits
+    cd = str(98 - int(bban + "182700") % 97)
+    if len(cd) < 2:
+        cd = "0" + str(cd)
+    iban = cc + cd + bban
+    return render_template('/acnttoiban/markazi.html', iban=iban)
+
+
+@app.route('/acnttoiban/ghavamin')
+def ghavamin():
+    return render_template('/acnttoiban/ghavamin.html')
+
+
+@app.route("/acnttoiban/ghavamin", methods=["POST"])
+def ghavaminconvert():
+    an = request.form['accountnumber']
+    # Bank identify number for ghavamin
+    bi = "052"
+    # Iran code
+    cc = "IR"
+    bban = bi + "0000" + str(an)
+
+    # check digits
+    cd = str(98 - int(bban + "182700") % 97)
+    if len(cd) < 2:
+        cd = "0" + str(cd)
+    iban = cc + cd + bban
+    return render_template('/acnttoiban/ghavamin.html', iban=iban)
+
+
+@app.route('/acnttoiban/mehreqtesad')
+def mehreqtesad():
+    return render_template('/acnttoiban/mehreeghtesad.html')
+
+
+@app.route("/acnttoiban/mehreqtesad", methods=["POST"])
+def mehreqtesadconvert():
+    an = request.form['accountnumber']
+    # Bank identify number for mehreqtesad
+    bi = "079"
+    # Iran code
+    cc = "IR"
+    bban = bi + "0" + str(an)[:-1] + "00" + str(an)[-1]
+
+    # check digits
+    cd = str(98 - int(bban + "182700") % 97)
+    if len(cd) < 2:
+        cd = "0" + str(cd)
+    iban = cc + cd + bban
+    return render_template('/acnttoiban/mehreqtesad.html', iban=iban)
+
+
+@app.route('/acnttoiban/mehriran')
+def mehriran():
+    return render_template('/acnttoiban/mehriran.html')
+
+
+@app.route("/acnttoiban/mehriran", methods=["POST"])
+def mehriranconvert():
+    an = request.form['accountnumber']
+    # Bank identify number for mehriran
+    bi = "060"
+    # Iran code
+    cc = "IR"
+    bban = bi + "0" + str(an)[:-1] + "00" + str(an)[-1]
+
+    # check digits
+    cd = str(98 - int(bban + "182700") % 97)
+    if len(cd) < 2:
+        cd = "0" + str(cd)
+    iban = cc + cd + bban
+    return render_template('/acnttoiban/mehriran.html', iban=iban)
+
+
+@app.route('/acnttoiban/maskan')
+def maskan():
+    return render_template('/acnttoiban/maskan.html')
+
+
+@app.route("/acnttoiban/maskan", methods=["POST"])
+def maskanconvert():
+    an = request.form['accountnumber']
+    accounttype = request.form['accounttype']
+    # Bank identify number for maskan
+    bi = "014"
+    # Iran code
+    cc = "IR"
+    if accounttype == "tashilat":
+        bban = bi + "302" + str(an)
+    elif accounttype == "seporde" and len(str(an)) == 11:
+        bban = bi + "0040000" + str(an)
+    elif accounttype == "seporde" and len(str(an)) == 12:
+        bban = bi + "00400000" + str(an)
+
+    # check digits
+    cd = str(98 - int(bban + "182700") % 97)
+    if len(cd) < 2:
+        cd = "0" + str(cd)
+    iban = cc + cd + bban
+    return render_template('/acnttoiban/mellat.html', iban=iban)
 
 
 
