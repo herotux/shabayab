@@ -797,7 +797,7 @@ def postbankconvert():
 
 
 
-@app.route('/acnttoiban/elebarimelal')
+@app.route('/acnttoiban/etebarimelal')
 def elebarimelal():
     return render_template('/acnttoiban/elebarimelal.html')
 
